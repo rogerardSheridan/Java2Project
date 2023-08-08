@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class Employee implements Serializable{
     
-    private double employeeId;
+    private int employeeId;
     private String firstName;
     private String lastName;
     private int age;
@@ -16,7 +16,7 @@ public class Employee implements Serializable{
     public Employee() {
     }
     
-    public Employee(double employeeId, String firstName, String lastName, int age, double wagePerHour, int workedHours, EmployeeType type, boolean admin) {
+    public Employee(int employeeId, String firstName, String lastName, int age, double wagePerHour, int workedHours, EmployeeType type, boolean admin) {
         this.employeeId = employeeId;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -27,11 +27,11 @@ public class Employee implements Serializable{
         this.admin = admin;
     }
 
-    public double getEmployeeId() {
+    public int getEmployeeId() {
         return employeeId;
     }
 
-    public void setEmployeeId(double employeeId) {
+    public void setEmployeeId(int employeeId) {
         this.employeeId = employeeId;
     }
 

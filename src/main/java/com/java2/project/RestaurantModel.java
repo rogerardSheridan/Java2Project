@@ -28,7 +28,7 @@ public class RestaurantModel {
         try{
             inputStream = new ObjectInputStream(new FileInputStream(FILES_PATH + "/" + employeeId+".dat"));
             employee = (Employee)inputStream.readObject();
-            System.out.println(employee);
+            //System.out.println(employee);
 	} catch(Exception e){
             System.out.println("Error reading objects"+e);
 	}finally{
@@ -42,7 +42,7 @@ public class RestaurantModel {
     }
     
     public EmployeeList readAllEmployeeFiles() {
-        EmployeeList employees = null;
+        EmployeeList employees = new EmployeeList();
         File directory = new File(FILES_PATH);
         File employeesFiles[] = directory.listFiles();
         for(File employee: employeesFiles) {
@@ -56,7 +56,7 @@ public class RestaurantModel {
         return employeeFile.delete();
     }
     
-    public Employee createEmployee(double employeeId, String firstName, String lastName, int age, double wage, int hours, EmployeeType type, boolean admin) {
+    public Employee createEmployee(int employeeId, String firstName, String lastName, int age, double wage, int hours, EmployeeType type, boolean admin) {
         Employee employee = new Employee(employeeId, firstName, lastName, age, wage, hours, type, admin);
         return employee;
     }
