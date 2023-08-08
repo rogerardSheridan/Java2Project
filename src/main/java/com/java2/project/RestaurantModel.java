@@ -9,10 +9,12 @@ import java.io.ObjectOutputStream;
 
 public class RestaurantModel {
     
+    private final String FILES_PATH = "C:/Users/threa/OneDrive/Documentos/Sheridan/Semester2/OOP2/Programs/Java2Project/employees";
+    
     public void createEmployeeFile(Employee employee){
         ObjectOutputStream outputStream = null;
         try {
-            outputStream = new ObjectOutputStream(new FileOutputStream(employee.getEmployeeId()+".dat"));
+            outputStream = new ObjectOutputStream(new FileOutputStream(FILES_PATH + "/" + employee.getEmployeeId()+".dat"));
             outputStream.writeObject(employee);
             outputStream.close();
 	} catch(IOException e) {
@@ -24,7 +26,7 @@ public class RestaurantModel {
         ObjectInputStream inputStream = null;
         Employee employee = null;
         try{
-            inputStream = new ObjectInputStream(new FileInputStream(employeeId+".dat"));
+            inputStream = new ObjectInputStream(new FileInputStream(FILES_PATH + "/" + employeeId+".dat"));
             employee = (Employee)inputStream.readObject();
             System.out.println(employee);
 	} catch(Exception e){
@@ -39,8 +41,18 @@ public class RestaurantModel {
         return employee;
     }
     
-    public boolean deleteEmployee(Employee employee) {
-        File employeeFile = new File(employee.getEmployeeId() + ".dat");
+    public EmployeeList readAllEmployeeFiles() {
+        EmployeeList employees = null;
+        File directory = new File(FILES_PATH);
+        File employeesFiles[] = directory.listFiles();
+        for(File employee: employeesFiles) {
+            employees.add(readEmployeeFile(employee.getName().substring(0, employee.getName().length() - 4)));
+        }
+        return employees;
+    }
+    
+    public boolean deleteEmployeeFile(Employee employee) {
+        File employeeFile = new File(FILES_PATH + "/" + employee.getEmployeeId() + ".dat");
         return employeeFile.delete();
     }
     

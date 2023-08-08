@@ -94,4 +94,9 @@ public class Employee implements Serializable{
     public double calculateMonthlyWage() {
         return this.wagePerHour * workedHours;
     }
+
+    @Override
+    public String toString() {
+        return "Employee{" + "employeeId=" + employeeId + ", firstName=" + firstName + ", lastName=" + lastName + ", age=" + age + ", wagePerHour=" + wagePerHour + ", workedHours=" + workedHours + ", type=" + type + ", admin=" + admin + '}';
+    }
 }
