@@ -10,6 +10,17 @@ import java.io.ObjectOutputStream;
 public class RestaurantModel {
     
     private final String FILES_PATH = "C:/Users/threa/OneDrive/Documentos/Sheridan/Semester2/OOP2/Programs/Java2Project/employees";
+    private int ID = 0;
+    
+    public RestaurantModel(){
+        EmployeeList employees = readAllEmployeeFiles();
+        if(!employees.isEmpty()){
+            for(Employee e: employees){
+                if(ID < e.getEmployeeId())
+                    ID = e.getEmployeeId();
+            }
+        }
+    }
     
     public void createEmployeeFile(Employee employee){
         ObjectOutputStream outputStream = null;
@@ -28,7 +39,6 @@ public class RestaurantModel {
         try{
             inputStream = new ObjectInputStream(new FileInputStream(FILES_PATH + "/" + employeeId+".dat"));
             employee = (Employee)inputStream.readObject();
-            //System.out.println(employee);
 	} catch(Exception e){
             System.out.println("Error reading objects"+e);
 	}finally{
@@ -41,7 +51,7 @@ public class RestaurantModel {
         return employee;
     }
     
-    public EmployeeList readAllEmployeeFiles() {
+    public final EmployeeList readAllEmployeeFiles() {
         EmployeeList employees = new EmployeeList();
         File directory = new File(FILES_PATH);
         File employeesFiles[] = directory.listFiles();
@@ -56,8 +66,8 @@ public class RestaurantModel {
         return employeeFile.delete();
     }
     
-    public Employee createEmployee(int employeeId, String firstName, String lastName, int age, double wage, int hours, EmployeeType type, boolean admin) {
-        Employee employee = new Employee(employeeId, firstName, lastName, age, wage, hours, type, admin);
+    public Employee createEmployee(String firstName, String lastName, int age, double wage, int hours, EmployeeType type, boolean admin) {
+        Employee employee = new Employee(++ID, firstName, lastName, age, wage, hours, type, admin);
         return employee;
     }
 }
